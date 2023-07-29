@@ -1,1 +1,6 @@
 <h1>Pizza ordered</h1>
+<form action="{% url 'order' %}" method="POST">
+    {% csrf_token %}
+    {{ manga-form }}
+    <input type="submit" value="Order Volume">
+</form>

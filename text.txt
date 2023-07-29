@@ -1,1 +1,3 @@
 1. pip install pillow
+2. build base directory of static files in settings formlearn (default)
+3. create extended static in manga by creating manga/statics

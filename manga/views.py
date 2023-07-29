@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from manga.form import MangaForm
+
 
 # Create your views here.
 def home(request):
@@ -7,7 +9,7 @@ def home(request):
 
 
 def order(request):
-    return render(request, 'manga/order.html')
+    return render(request, 'manga/order.html', {'manga-form': form})
 
 
 def manga(request):
