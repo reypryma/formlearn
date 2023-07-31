@@ -1,6 +1,16 @@
-<h1>Pizza ordered</h1>
-<form action="{% url 'order' %}" method="POST">
+{% load widget_tweaks %}
+
+<h1>Buy a Manga</h1>
+<form enctype="multipart/form-data" action="{% url 'order' %}" method="POST">
     {% csrf_token %}
     {{ manga-form }}
     <input type="submit" value="Order Volume">
+</form>
+
+<br><br>
+Want buy More Manga?
+<form action="{% url 'mangas' %}" method="get">
+    {% csrf_token %}
+    {{ multiple_form }}
+    <input type="submit" value="Get Pizzas">
 </form>
