@@ -1,0 +1,12 @@
+{% extends 'manga/base.html' %}
+{% block body %}
+    <div class="container">
+        <h1>Edit Manga</h1>
+        <h2>{{ note }}</h2>
+        <form action="{% url 'edit_order' manga.id %}" method="post">
+            {% csrf_token %}z
+            {{ manga_form }}
+            <input type="submit" value="Edit Order">
+        </form>
+    </div>
+{% endblock %}
