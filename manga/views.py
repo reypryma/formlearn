@@ -27,11 +27,11 @@ def order(request):
         else:
             note = 'Order was not created, please try again'
         return render(request, 'manga/order.html',
-                      {'multiple_form': multiple_form, 'manga-form': filled_form, 'note': note,
+                      {'multiple_form': multiple_form, 'manga_form': filled_form, 'note': note,
                        'bought_manga_pk': bought_manga_pk})
     else:
         form = MangaForm()
-        return render(request, 'manga/order.html', {'manga-form': form})
+        return render(request, 'manga/order.html', {'manga_form': form})
 
 
 def edit_order(request, pk):
@@ -66,3 +66,6 @@ def mangas(request):
         return render(request, 'manga/manga.html', {'note': note, 'formset': formset})
     else:
         return render(request, 'manga/manga.html', {'formset': formset})
+
+
+

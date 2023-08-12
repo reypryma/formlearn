@@ -1,9 +1,14 @@
 {% extends 'manga/base.html' %}
+{% load static %}
 {% block body %}
-<h1>Nakoman</h1>
-<div class="text-center">
-  {% load static %}
-  <img src="{% static 'pjGNn5p.jpg' %}" class="img-fluid" alt="Nako Shop">
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12">
+            <img src="{% static 'pjGNn5p.jpg' %}" class="img-fluid" alt="Nako Shop">
+        </div>
+    </div>
 </div>
-<a href="{% url 'order' %}">Order a manga</a>
+
+
 {% endblock %}

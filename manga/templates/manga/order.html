@@ -1,16 +1,25 @@
+{% extends 'manga/base.html' %}
+{% block body %}
 {% load widget_tweaks %}
 
-<h1>Buy a Manga</h1>
-<form enctype="multipart/form-data" action="{% url 'order' %}" method="POST">
-    {% csrf_token %}
-    {{ manga-form }}
-    <input type="submit" value="Order Volume">
-</form>
+<div class="container mt-5">
+    <h1 class="text-center">Buy a Manga</h1>
+    <form enctype="multipart/form-data" action="{% url 'order' %}" method="POST" class="mt-4">
+        {% csrf_token %}
+        {{ manga_form }}
+        <button type="submit" class="btn btn-primary">Order Volume</button>
+    </form>
+</div>
 
-<br><br>
-Want buy More Manga?
-<form action="{% url 'mangas' %}" method="get">
-    {% csrf_token %}
-    {{ multiple_form }}
-    <input type="submit" value="Get Pizzas">
-</form>
+<div class="container mt-5">
+    <h1 class="text-center">Want to buy more Manga?</h1>
+    <form action="{% url 'mangas' %}" method="get" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ multiple_form.numbers.id_for_label }}" class="form-label">Number of Manga</label>
+            {{ multiple_form.numbers|add_class:"form-control" }}
+        </div>
+        <button type="submit" class="btn btn-primary">Get Manga</button>
+    </form>
+</div>
+{% endblock %}

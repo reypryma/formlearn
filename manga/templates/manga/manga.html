@@ -6,7 +6,7 @@
 <h2>{{ note }}</h2>
 
 
-<form action="{% url 'manga' %}" method="post">
+<form action="{% url 'mangas' %}" method="post">
   {% csrf_token %}
     {{ formset.management_form }}
 

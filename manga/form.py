@@ -1,16 +1,25 @@
 from django import forms
 
-from manga.models import Manga, Volume
+from manga.models import Manga, Volume, SubGenre
 
 
 class MangaForm(forms.ModelForm):
-    volume = forms.ModelChoiceField(queryset=Volume, empty_label=None, widget=forms.CheckboxSelectMultiple)
+    volume = forms.ModelMultipleChoiceField(queryset=Volume.objects.all(), widget=forms.CheckboxSelectMultiple)
+    sub_genres = forms.ModelMultipleChoiceField(queryset=SubGenre.objects.all(), widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = Manga
-        fields = ['genre', 'sub_genre', 'volume']
-        labels = {'genre': 'Genre', 'sub_genre': 'Sub Genre', 'volume': 'Volume'}
+        fields = ['genre', 'sub_genres', 'volume']
+        labels = {'genre': 'Genre', 'sub_genres': 'Sub Genre', 'volume': 'Volume'}
 
 
 class MultipleMangaForm(forms.Form):
     numbers = forms.IntegerField(min_value=2, max_value=8)
+
+
+class VolumeForm(forms.ModelForm):
+    manga = forms.ModelChoiceField(queryset=Manga.objects.all(), label='Associated Manga')
+
+    class Meta:
+        model = Volume
+        fields = ['title', 'manga']
