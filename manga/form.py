@@ -6,6 +6,7 @@ from manga.models import Manga, Volume, SubGenre
 class MangaForm(forms.ModelForm):
     volume = forms.ModelMultipleChoiceField(queryset=Volume.objects.all(), widget=forms.CheckboxSelectMultiple)
     sub_genres = forms.ModelMultipleChoiceField(queryset=SubGenre.objects.all(), widget=forms.CheckboxSelectMultiple)
+    # image = forms.ImageField()
 
     class Meta:
         model = Manga

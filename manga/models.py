@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from django.shortcuts import render
 
 
@@ -18,11 +20,10 @@ class Genre(models.Model):
 
 
 class SubGenre(models.Model):
-    title = models.CharField(max_length=100)
-    parent_genre = models.ForeignKey(Genre, on_delete=models.CASCADE, blank=True, null=True)
+    parent_genre = models.OneToOneField(Genre, on_delete=models.CASCADE, blank=True, null=True, unique=True)
 
     def __str__(self):
-        return self.title
+        return self.parent_genre.title
 
 
 class Manga(models.Model):

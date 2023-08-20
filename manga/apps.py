@@ -1,6 +1,11 @@
+# manga/apps.py
+
 from django.apps import AppConfig
 
 
-class PizzaConfig(AppConfig):
+class MangaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'manga'
+
+    def ready(self):
+        import manga.signals  # Correct relative import
