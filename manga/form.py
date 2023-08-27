@@ -4,9 +4,11 @@ from manga.models import Manga, Volume, SubGenre
 
 
 class MangaForm(forms.ModelForm):
-    volume = forms.ModelMultipleChoiceField(queryset=Volume.objects.all(), widget=forms.CheckboxSelectMultiple)
-    sub_genres = forms.ModelMultipleChoiceField(queryset=SubGenre.objects.all(), widget=forms.CheckboxSelectMultiple)
-    # image = forms.ImageField()
+    volume = forms.ModelMultipleChoiceField(
+        queryset=Volume.objects.all().order_by('title'), widget=forms.CheckboxSelectMultiple)
+    sub_genres = forms.ModelMultipleChoiceField(
+        queryset=SubGenre.objects.all().order_by('parent_genre'), widget=forms.CheckboxSelectMultiple)
+    image = forms.ImageField()
 
     class Meta:
         model = Manga
@@ -15,7 +17,7 @@ class MangaForm(forms.ModelForm):
 
 
 class MultipleMangaForm(forms.Form):
-    numbers = forms.IntegerField(min_value=2, max_value=8)
+    numbers = forms.IntegerField(min_value=2, max_value=5)
 
 
 class VolumeForm(forms.ModelForm):

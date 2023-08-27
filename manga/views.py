@@ -13,8 +13,8 @@ def home(request):
 def order(request):
     multiple_form = MultipleMangaForm()
 
-    if request.path == 'POST':
-        filled_form = MangaForm(request.POST)
+    if request.method == 'POST':
+        filled_form = MangaForm(request.POST, request.FILES)
         bought_manga_pk = None
         if filled_form.is_valid():
             bought_manga = filled_form.save()
@@ -31,7 +31,7 @@ def order(request):
                        'bought_manga_pk': bought_manga_pk})
     else:
         form = MangaForm()
-        return render(request, 'manga/order.html', {'manga_form': form})
+        return render(request, 'manga/order.html', {'manga_form': form, 'multiple_form': multiple_form})
 
 
 def edit_order(request, pk):
