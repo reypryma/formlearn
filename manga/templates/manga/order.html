@@ -1,0 +1,51 @@
+{% extends 'manga/base.html' %}
+{% block body %}
+{% load widget_tweaks %}
+
+<div class="container mt-5">
+    <h1 class="text-center">Buy a Manga</h1>
+    <h2>{{ note }}</h2>
+    {% if bought_manga_pk %}
+        <a href="{% url "edit_order" bought_manga_pk %}">Edit your order</a>
+    {% endif %}
+
+    <form enctype="multipart/form-data" action="{% url 'order' %}" method="POST" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ manga_form.genre.label_tag }}
+            {{ manga_form.genre|add_class:"form-select" }}
+            {{ manga_form.genre.errors }}
+        </div>
+        <div class="mb-3">
+            {{ manga_form.sub_genres.label_tag }}
+            {{ manga_form.sub_genres }}
+            {{ manga_form.sub_genres.errors }}
+        </div>
+        <div class="mb-3">
+            {{ manga_form.volume.label_tag }}
+            {{ manga_form.volume }}
+            {{ manga_form.volume.errors }}
+        </div>
+        <div class="mb-3">
+            {{ manga_form.image.label_tag }}
+            {{ manga_form.image|add_class:"form-control" }}
+        </div>
+        <button type="submit" class="btn btn-primary">Order Volume</button>
+    </form>
+</div>
+
+
+<div class="container mt-5">
+    <h1 class="text-center">Want to buy more Manga?</h1>
+    <form action="{% url 'mangas' %}" method="get" class="mt-4">
+        {% csrf_token %}
+            <label for="{{ multiple_form.numbers.id_for_label }}" class="form-label">
+                {{ multiple_form.numbers.label }}
+            </label>
+            <div>
+                {{ multiple_form.as_div }}
+            </div>
+        <button type="submit" class="btn btn-primary">Get Manga</button>
+    </form>
+</div>
+{% endblock %}
