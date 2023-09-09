@@ -51,16 +51,21 @@ def mangas(request):
     number_of_manga = 2
     filled_multiple_pizza_form = MultipleMangaForm(request.GET)
     if filled_multiple_pizza_form.is_valid():
-        number_of_manga = filled_multiple_pizza_form.cleaned_data['number']
+        number_of_manga = filled_multiple_pizza_form.cleaned_data['numbers']
     manga_form_set = formset_factory(MangaForm, extra=number_of_manga)
     formset = manga_form_set()
+
     if request.method == 'POST':
         filled_formset = manga_form_set(request.POST)
         if filled_formset.is_valid():
+            print('Success')
             for form in filled_formset:
                 print(form.cleaned_data['genre'])
+                print(form.cleaned_data['sub_genres'])
+                print(form.cleaned_data['volume'])
             note = 'Manga have been purchased'
         else:
+            print('Erroer', filled_formset.errors)
             note = 'Order was not created, please try again'
 
         return render(request, 'manga/manga.html', {'note': note, 'formset': formset})

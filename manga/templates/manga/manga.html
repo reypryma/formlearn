@@ -14,6 +14,12 @@
     {% for form in formset %}
       {{ form }}
       <br><br>
+        {% if field.errors %}
+        <div class="error">
+            Error Input form <br>
+          {{ field.errors|striptags }}
+        </div>
+      {% endif %}
     {% endfor %}
     <input type="submit" value="Order Pizzas" />
   </form>
