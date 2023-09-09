@@ -9,6 +9,7 @@ class MangaForm(forms.ModelForm):
         widget=forms.Select,  # Use Select widget for a single choice
         required=False  # Make it optional if needed
     )
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Manga
